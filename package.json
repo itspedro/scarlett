@@ -1,0 +1,23 @@
+{
+  "name": "scarlett",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "node ."
+  },
+  "author": "Pdr",
+  "license": "ISC",
+  "dependencies": {
+    "@discordjs/builders": "^1.4.0",
+    "@discordjs/rest": "^1.5.0",
+    "canvas": "^2.11.0",
+    "cron": "^2.2.0",
+    "discord-api-types": "^0.37.28",
+    "discord.js": "^14.7.1",
+    "dotenv": "^16.0.3",
+    "mongoose": "^6.9.0",
+    "node-fetch": "^2.6.8",
+    "nodemon": "^2.0.20"
+  }
+}
