@@ -96,12 +96,6 @@ client.on("ready", async () => {
 
 });
 
-let n1 = 1;
-let n2 = 1;
-
-console.log(n1 + n2)
-console.log(parseInt(n1)+parseInt(n2))
-
 client.on('messageCreate', (message) => {
   console.log(message.content);
   console.log(message.author.tag);
