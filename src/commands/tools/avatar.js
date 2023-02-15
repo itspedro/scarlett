@@ -11,14 +11,12 @@ module.exports = {
     ),
   async execute(interaction, client) {
 
-    const user = interaction.getUser('nome');
-    const member = interaction.options.get('nome').value
+    const member = interaction.options.getUser('nome');
 
     const embed = new EmbedBuilder()
-        .setAuthor(user.displayAvatarURL())
-        .setTitle('Avatar')
-        .setDescription(`O avatar de **${member.userName}**`)
+        .setTitle(`O avatar de **${member.username}`)
         .setImage(member.displayAvatarURL({ dynamic: true}))
+        .setColor('Random')
 
     await interaction.Reply({
 
