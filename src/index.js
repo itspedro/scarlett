@@ -69,7 +69,7 @@ client.on("ready", async () => {
   //   if (interaction.commandName === "ping") interaction.reply("Pong!");
   // });
 
-  let bomDiaCaralho = new cron.CronJob("00 * 07 * * *", async () => {
+  let bomDiaCaralho = new cron.CronJob("00 00 10 * * *", async () => {
     
     const guild = client.guilds.cache.get("874833976085344307");
     const channel = guild.channels.cache.get("875014073543188490");
@@ -105,7 +105,7 @@ async () => {
   try {
     console.log(`Started refreshing application (/) commands.`);
 
-    const fs = await rest.put(Routes.applicationGuildCommands(Client), {
+    const fs = await rest.put(Routes.applicationGuildCommands(Client, guild), {
       body: commands,
     });
     console.log(`Successfully reloaded application (/) commands.`);
