@@ -10,7 +10,7 @@ module.exports = {
         });
 
         const newMessage = `Websocket heartbeat: ${client.ws.ping}ms.\nRoundtrip latency: ${message.createdTimestamp - interaction.createdTimestamp}ms.`
-        await interaction.reply({
+        await interaction.editReply({
             content: newMessage
         });
     }
