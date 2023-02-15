@@ -12,7 +12,7 @@ module.exports = {
   async execute(interaction, client) {
 
     const user = interaction.getUser('nome');
-    const member = interaction.options.getUser('nome')
+    const member = interaction.options.get('nome').value
 
     const embed = new EmbedBuilder()
         .setAuthor(user.displayAvatarURL())
