@@ -12,6 +12,7 @@
     "@discordjs/builders": "^1.4.0",
     "@discordjs/rest": "^1.5.0",
     "canvas": "^2.11.0",
+    "chalk": "^5.2.0",
     "cron": "^2.2.0",
     "discord-api-types": "^0.37.28",
     "discord.js": "^14.7.1",
