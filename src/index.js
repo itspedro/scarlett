@@ -105,7 +105,7 @@ async () => {
   try {
     console.log(`Started refreshing application (/) commands.`);
 
-    const fs = await rest.put(Routes.applicationGuildCommands(Client, guild), {
+    const fs = await rest.put(Routes.applicationGuildCommands(Client), {
       body: commands,
     });
     console.log(`Successfully reloaded application (/) commands.`);
