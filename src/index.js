@@ -1,6 +1,6 @@
 require("dotenv").config();
 
-const { Client, Collection, GatewayIntentBits, EmbedBuilder, Embed  } = require("discord.js");
+const { Client, Collection, GatewayIntentBits, EmbedBuilder, Embed, ActivityType  } = require("discord.js");
 
 const cron = require("cron");
 const fetch = require("node-fetch");
@@ -68,6 +68,7 @@ client.on("ready", async () => {
 
   //   if (interaction.commandName === "ping") interaction.reply("Pong!");
   // });
+  client.user.setStatus('idle');
 
   let bomDiaCaralho = new cron.CronJob("00 00 10 * * *", async () => {
     
