@@ -73,7 +73,7 @@ client.on("ready", async () => {
   let bomDiaCaralho = new cron.CronJob("00 00 10 * * *", async () => {
     
     const guild = client.guilds.cache.get("874833976085344307");
-    const channel = guild.channels.cache.get("875014073543188490");
+    const channel = guild.channels.cache.get("1075315140108492821");
     const url = `https://api.giphy.com/v1/gifs/search?api_key=${process.env.API_KEY}&q=bomdia&limit=25&offset=0&rating=g&lang=pt`;
     const resposta = await fetch(url);
     const resultado = await resposta.json();
