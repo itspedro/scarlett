@@ -39,7 +39,7 @@ module.exports = {
 
     const embed =   new EmbedBuilder()
     .setTitle(`Punição!`)
-    .setDescription(`O usuario **${user.tag}** foi **mutado**.`)
+    .setDescription(`O usuário **${user.tag}** foi **mutado**.`)
     .setColor(0x18e1ee)
     .setThumbnail(user.displayAvatarURL())
     .setTimestamp(Date.now())

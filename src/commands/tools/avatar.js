@@ -7,7 +7,7 @@ module.exports = {
     .addUserOption((option) => 
         option
         .setName("nome")
-        .setDescription("Nome do úsuario desejado")
+        .setDescription("Nome do usuário desejado")
     ),
   async execute(interaction, client) {
 

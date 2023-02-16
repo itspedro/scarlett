@@ -5,7 +5,7 @@ const fetch = require("node-fetch");
 module.exports = {
     data: new  SlashCommandBuilder()
         .setName('catfact')
-        .setDescription('Responde um fato aleatorio sobre gato!'),
+        .setDescription('Responde um fato aleatório sobre gato!'),
     async execute(interaction, client) {
         //const fact = Axios.get('https://meowfacts.herokuapp.com/?lang=por-br').then((res) => {res.data.data[0]})
         const url = `https://meowfacts.herokuapp.com/?lang=por-br`;

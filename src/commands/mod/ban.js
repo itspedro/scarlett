@@ -32,7 +32,7 @@ module.exports = {
     }).catch(console.error);
 
     await interaction.reply({
-        content: `O usuario ${user.tag} foi banido.`
+        content: `O usuário ${user.tag} foi banido.`
     });
   },
 };
