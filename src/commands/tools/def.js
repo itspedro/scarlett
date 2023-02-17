@@ -5,10 +5,11 @@ module.exports = {
     data: new  SlashCommandBuilder()
         .setName("def")
         .setDescription("Responde a definição do termo pedido")
-        .setRequired(true)
         .addStringOption((option) => 
             option
-            .setName("termo")),
+            .setName("termo")
+            .setRequired(true)
+        ),
     async execute(interaction, client) {
 
         const termo = interaction.options.getString("termo");
