@@ -61,11 +61,6 @@ client.on("ready", async () => {
   console.log("Bom dia");
 });
 
-client.on('messageCreate', (message) => {
-  console.log(message.content);
-  console.log(message.author.tag);
-});
-
 async () => {
   try {
     console.log(`Started refreshing application (/) commands.`);
