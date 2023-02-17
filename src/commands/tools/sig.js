@@ -14,7 +14,7 @@ module.exports = {
     async execute(interaction) {
         
         const termGet = interaction.options.getString("termo");
-        const termo = termGet.ChartAt(0).toUpperCase(); + termGet.slice(1);
+        const termo = termGet.CharAt(0).toUpperCase(); + termGet.slice(1);
 
         const urlSen = await fetch(`https://dicio-api-ten.vercel.app/v2/frases/${termo}`);
         const frase = await urlSen.json();
