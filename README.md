@@ -7,13 +7,14 @@
 
 # Table of contents
 
-- [Screenshot](#screenshot)
+- [Screenshots](#screenshots)
 - [Features](#features)
 
-## Screenshot
+## Screenshots
 
 <div align="center">
-<img src="https://i.imgur.com/FL0onIM.png" width="700px"/>
+<img src="https://i.imgur.com/FL0onIM.png" width="500px"/>
+<img src="https://i.imgur.com/EsCqlCp.png" width="500px"/>
 </div>
 
 <br/><br/>
