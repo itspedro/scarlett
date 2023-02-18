@@ -22,6 +22,10 @@ module.exports = {
         const urlDef = await fetch(`https://dicio-api-ten.vercel.app/v2/${termo}`);
         const def = await urlDef.json();
 
+        const trim = (str, max) => (
+            str.length > max ? `${str.slice(0, max - 3)}...` : str
+        );
+
         const embed = new EmbedBuilder()
             .setTitle(termo)
             .setColor(0x18e1ee)
