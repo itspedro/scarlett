@@ -2,7 +2,7 @@
     <img src="https://i.imgur.com/feS5Q6y.png" width="100%" alt="Scarlett"/>
 </p>
 
-<b>scarlett</b> is a bot application for discord that improve users experience.
+<b>scarlett</b> is a bot application for discord that improve users experience. With features built with flexibility and ease of use in mind. Is a bot for moderation, or just for fun of your community.
 
 
 # Table of contents
