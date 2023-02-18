@@ -14,7 +14,7 @@
 
 <div align="center">
 <img src="https://i.imgur.com/FL0onIM.png" width="700px"/>
-
+</div>
 
 <br/><br/>
 
@@ -24,3 +24,5 @@
 - Easy to integrate 💻
 - No paid features. 🛑
 - Upgrade your community 🌍
+
+<br/><br/>
