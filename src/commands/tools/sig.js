@@ -25,16 +25,26 @@ module.exports = {
         const trim = (str, max) => (
             str.length > max ? `${str.slice(0, max - 3)}...` : str
         );
+        
+        const upCase = (str) => (
+            str.charAt(0).toUpperCase() + str.slice(1)
+        );
+
+        const significado = def[0].meanings.toString();
+        const fraseSentence = frase[0].sentence.toString();
+        const fraseAuthor = frase[0].author.toString();
+        const des = def[0].partOfSpeech.toString()
+        let etimologia = def[0].etymology.toString();
 
         const embed = new EmbedBuilder()
-            .setTitle(termo)
+            .setTitle(upCase(termo))
             .setColor(0x18e1ee)
-            .setDescription(def[0].partOfSpeech.toString())
+            .setDescription(`>>> ${upCase(des)}\n${etimologia = '' ? '' : etimologia}`)
             .addFields(
-                { name: 'Significado ', value: trim(def[0].meanings.toString(), 1024) },
-                { name:'Frase', value: `"${frase[0].sentence.toString()}" **${frase[0].author.toString()}**` })
+                { name: '``Significado`` ', value: trim(significado, 1024) },
+                { name:'``Frase``', value: `\"${fraseSentence}\" **${fraseAuthor}**` })
 
-        await interaction.editReply({
+        await interaction.reply({
             fetchReply: true,
             embeds: [embed]
         });
