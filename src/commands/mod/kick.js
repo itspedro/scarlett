@@ -26,7 +26,7 @@ module.exports = {
 
     const embed =  new EmbedBuilder()
     .setTitle(`Punição!`)
-    .setDescription(`O usuario **${user.tag}** foi **kickado**.`)
+    .setDescription(`O usuário **${user.tag}** foi **kickado**.`)
     .setColor(0x18e1ee)
     .setTimestamp()
     .addFields([
