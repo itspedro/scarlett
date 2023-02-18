@@ -9,7 +9,7 @@ module.exports = {
             option
                 .setName("termo")
                 .setRequired(true)
-                .setDescription("termo desejado")
+                .setDescription("termo desejado")   
     ),
     async execute(interaction) {
         
@@ -25,10 +25,10 @@ module.exports = {
         const embed = new EmbedBuilder()
             .setTitle(termo)
             .setColor(0x18e1ee)
-            .setDescription(def[0].partOfSpeech)
+            .setDescription(def[0].partOfSpeech.toString())
             .addFields(
-                { name: 'Significado ', value: def[0].meanings },
-                { name:'Frase', value: `"${frase[0].sentence}" **${frase[0].author}**` })
+                { name: 'Significado ', value: def[0].meanings.toString() },
+                { name:'Frase', value: `"${frase[0].sentence.toString()}" **${frase[0].author.toString()}**` })
 
         await interaction.reply({
             embeds: [embed]
