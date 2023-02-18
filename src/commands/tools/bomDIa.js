@@ -33,7 +33,9 @@ module.exports = {
       const minutos = interaction.options.getInteger("minutos");
       const zeroPad = (num) => num.toString().padStart(2, '0')
 
-      const bomDia = new cron.CronJob(`00 ${zeroPad(!minutos ? 00 : minutos)} ${zeroPad(horas)} * * *`, async() => {
+      const bomDia = new cron.CronJob({
+        cronTime: `00 ${zeroPad(!minutos ? 00 : minutos)} ${zeroPad(horas)} * * *`,
+        onTick: async() => {
   
         const url = `https://api.giphy.com/v1/gifs/search?api_key=${API_KEY}&q=bomdia&limit=25&offset=0&rating=g&lang=pt`;
         const resposta = await fetch(url);
@@ -50,7 +52,9 @@ module.exports = {
           .setTimestamp();
   
         channel.send({embeds: [embed]});
-      });
+      },
+      timeZone: 'America/Sao_Paulo'
+    });
 
     bomDia.start();
     console.log("Bom dia");
