@@ -34,7 +34,8 @@ module.exports = {
                 { name: 'Significado ', value: trim(def[0].meanings.toString(), 1024) },
                 { name:'Frase', value: `"${frase[0].sentence.toString()}" **${frase[0].author.toString()}**` })
 
-        await interaction.reply({
+        await interaction.editReply({
+            fetchReply: true,
             embeds: [embed]
         });
     }
