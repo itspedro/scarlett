@@ -27,7 +27,7 @@ module.exports = {
             .setColor(0x18e1ee)
             .setDescription(def[0].partOfSpeech)
             .addFields(
-                { name: 'Significado ', value: def[0].meanings.toString() },
+                { name: 'Significado ', value: def[0].meanings },
                 { name:'Frase', value: `"${frase[0].sentence}" **${frase[0].author}**` })
 
         await interaction.reply({
