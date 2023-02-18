@@ -1,9 +1,8 @@
 require("dotenv").config();
 const { Client, Collection, GatewayIntentBits, EmbedBuilder, Embed, ActivityType  } = require("discord.js");
-const cron = require("cron");
 const fetch = require("node-fetch");
 const fs = require("fs");
-const { token, API_KEY, databaseToken } = process.env;
+const { token, databaseToken } = process.env;
 const { connect } = require('mongoose');
 
 
@@ -34,32 +33,27 @@ console.log("Conectando...");
 
 client.on("ready", async () => {
 
-  client.user.setStatus('idle');
+  let servers = client.guilds.cache.size;
+  let serverMembers = client.guilds.cache.reduce((a,b) => a + b.memberCount, 0 );
 
-  let bomDia = new cron.CronJob("00 00 10 * * *", async () => {
-    
-    const guild = client.guilds.cache.get("874833976085344307");
-    const channel = guild.channels.cache.get("1075315140108492821");
-    const url = `https://api.giphy.com/v1/gifs/search?api_key=${API_KEY}&q=bomdia&limit=25&offset=0&rating=g&lang=pt`;
-    const resposta = await fetch(url);
-    const resultado = await resposta.json();
-    const index = Math.floor(Math.random() * resultado.data.length);
-    const gif = `https://media4.giphy.com/media/${resultado.data[index].id}/giphy.gif?&rid=giphy.gif`
+  const actives = [
+    {type: ActivityType.Competing, text:`${servers} servidores.`, status:`online`},
+    {type: ActivityType.Watching, text:` os ${serverMembers} membros.`, status:`dnd`},
+    {type: ActivityType.Listening, text:`caneta azul.`, status:`idle`}
+  ];
 
-    const embed = new EmbedBuilder()
-     .setTitle(`Bom Dia!`)
-     .setColor(0x18e1ee)
-     .setDescription(':point_up: Clique aqui se o gif não aparecer.')
-     .setURL(gif)
-     .setImage(gif)
-     .setTimestamp();
+  setInterval(() => {
+      const index = Math.floor(Math.random() * actives.length)
+      const text = actives[index].text;
+      const type = actives[index].type;
+      const status = actives[index].status;
 
-    channel.send({embeds: [embed]});
-  });
-  
-  bomDia.start();
-  console.log("Bom dia");
-});
+      client.user.setPresence({ activities: [{name: `${text}`, type: type}], status: status});
+
+  }, 10000)
+
+
+}),
 
 async () => {
   try {
@@ -73,5 +67,3 @@ async () => {
     console.error(error);
   }
 };
-
-
