@@ -2,6 +2,7 @@ module.exports = {
     name: 'ready',
     once: true,
     async execute(client) {
-        console.log(`Pronto!! ${client.user.tag} esta online.`);
-    }
-}
+          setInterval(client.pickPresence, 10000);
+        console.log(`${client.user.tag} esta online.`);
+    },
+};
