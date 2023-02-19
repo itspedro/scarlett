@@ -7,25 +7,8 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName("teste")
     .setDescription("teste!")
-    .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
-    .addChannelOption((option) =>
-        option
-            .setName("chat")
-            .setDescription("Chat desejado")
-            .setRequired(true)
-    )
-    .addIntegerOption((option) =>
-        option
-          .setName("horas")
-          .setDescription("Horas desejada")
-          .setRequired(true)
-    )
-    .addIntegerOption((option) =>
-        option
-          .setName("minutos")
-          .setDescription("Minutos desejado")
-          .setRequired(true)
-    ),
+    .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
+  
   async execute(interaction, client) {
 
       const channel = interaction.options.getChannel("chat");

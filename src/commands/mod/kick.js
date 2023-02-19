@@ -1,9 +1,10 @@
-const { SlashCommandBuilder, EmbedBuilder, Embed  } = require("discord.js");
+const { SlashCommandBuilder, EmbedBuilder, PermissionFlagsBits  } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("kick")
     .setDescription("Da um kick.")
+    .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
     .addUserOption((option) =>
       option
         .setName("nome")

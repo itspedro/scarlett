@@ -1,9 +1,10 @@
-const { SlashCommandBuilder } = require("discord.js");
+const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("ban")
     .setDescription("Da um ban.")
+    .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
     .addUserOption((option) =>
       option
         .setName("nome")
@@ -21,10 +22,6 @@ module.exports = {
       .catch(console.error);
 
     if (!reason) reason = "Sem motivo."
-
-    user.send({
-        content:  `Você foi banido do: ${interaction.guild.name}\n Motivo: ${reason}`
-    }).catch(console.log('DM off'));
 
     await member.ban({
         deleteMessageDays: 1,

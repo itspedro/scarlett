@@ -17,7 +17,6 @@ module.exports = {
         console.log(resultado);
         const fact = resultado.data[0];
         const message = `${fact}`
-        console.log(fact)
 
         await interaction.reply({
             content: message

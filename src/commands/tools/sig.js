@@ -3,7 +3,7 @@ const fetch = require("node-fetch");
 
 module.exports = {
     data: new SlashCommandBuilder()
-        .setName("sig")
+        .setName("significado")
         .setDescription("Responde a definição do termo pedido")
         .addStringOption((option) => 
             option

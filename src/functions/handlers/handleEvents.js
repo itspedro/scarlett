@@ -32,7 +32,7 @@ module.exports = (client) => {
                 event.execute(...args, client)
               );
             else
-              connection.once(event.name, (...args) =>
+              connection.on(event.name, (...args) =>
                 event.execute(...args, client)
               );
           }
