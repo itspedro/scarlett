@@ -29,17 +29,17 @@ module.exports = {
 
     if (!reason) reason = "Sem motivo.";
 
+    await member.timeout(time * 60 * 1000, reason).catch(console.error);
+
     user
       .send({
-        content: `Você foi mutado do: ${interaction.guild.name}\nMotivo: ${reason}`,
+        content: `Você foi silenciado do: ${interaction.guild.name}\nMotivo: ${reason}`,
       })
       .catch(console.log("DM off"));
 
-    await member.timeout(time * 60 * 1000, reason).catch(console.error);
-
     const embed =   new EmbedBuilder()
     .setTitle(`Punição!`)
-    .setDescription(`O usuário **${user.tag}** foi **mutado**.`)
+    .setDescription(`O usuário **${user.tag}** foi **silenciado**.`)
     .setColor(0x18e1ee)
     .setThumbnail(user.displayAvatarURL())
     .setTimestamp(Date.now())
