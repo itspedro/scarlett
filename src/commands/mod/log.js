@@ -32,6 +32,8 @@ module.exports = {
 
     } else {
 
+        console.log(chat)
+
         const embed = new EmbedBuilder()
         .setTitle(`Server logs no Banco de dados`)
         .setDescription(`Server: **${guildProfile.guildName}**`)

@@ -1,9 +1,10 @@
 const { SlashCommandBuilder, EmbedBuilder, PermissionFlagsBits  } = require("discord.js");
+const Guild = require ('../../schemas/guild');
 
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("kick")
-    .setDescription("Da um kick.")
+    .setDescription("Da um kick em determinado usuário")
     .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
     .addUserOption((option) =>
       option
@@ -14,7 +15,11 @@ module.exports = {
     .addStringOption((option) =>
       option.setName("motivo").setDescription("Motivo para dar o kick.")
     ),
-  async execute(interaction, client) {
+  async execute(interaction) {
+
+    let guildProfile = await Guild.findOne({ guildId: interaction.guild.id});
+    const channel = interaction.guild.channels.cache.get(guildProfile.guildLog);
+
     const user = interaction.options.getUser("nome");
     let reason = interaction.options.getString("motivo");
     const member = await interaction.guild.members
@@ -37,10 +42,12 @@ module.exports = {
         inline: true,
       }
     ]);
+
+    channel.send({ embeds: [embed] });
     
     await interaction.reply({
-      embeds: [embed],
-        //content: `O usuario ${user.tag} foi kickado.`
+      content: `O usuario ${user.tag} foi kickado.`,
+      ephemeral: true
     });
   },
 };

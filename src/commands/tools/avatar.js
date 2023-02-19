@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, Embed, EmbedBuilder } = require("discord.js");
+const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -9,7 +9,7 @@ module.exports = {
         .setName("nome")
         .setDescription("Nome do usuário desejado")
     ),
-  async execute(interaction, client) {
+  async execute(interaction) {
 
     const member = interaction.options.getUser('nome');
 

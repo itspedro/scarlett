@@ -21,11 +21,11 @@ module.exports = {
     .addStringOption((option) =>
       option.setName("motivo").setDescription("Motivo para dar o Timeout.")
     ),
-  async execute(interaction) {
+  async execute(interaction, client) {
 
-    // let guildProfile = await Guild.findOne({ guildId: interaction.guild.id });
+    let guildProfile = await Guild.findOne({ guildId: interaction.guild.id });
+    const channel = interaction.guild.channels.cache.get(guildProfile.guildLog);
 
-    // const channel = guildProfile.findOne(ch => ch.id === interaction.guild.channels);
     const user = interaction.options.getUser("nome");
     let reason = interaction.options.getString("motivo");
     let time = interaction.options.getInteger("tempo");
@@ -62,11 +62,11 @@ module.exports = {
       }
     ]);
 
-
-    // channel.send({ embeds: [embed]});
+    channel.send({ embeds: [embed]});
   
     await interaction.reply({
-      embeds: [embed]
+      content: `O usuário ${user.tag} foi punido.`,
+      ephemeral: true
     });
   },
 };

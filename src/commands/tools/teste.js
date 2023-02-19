@@ -9,7 +9,7 @@ module.exports = {
     .setDescription("teste!")
     .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
   
-  async execute(interaction, client) {
+  async execute(interaction) {
 
       const channel = interaction.options.getChannel("chat");
       const horas = interaction.options.getInteger("horas");

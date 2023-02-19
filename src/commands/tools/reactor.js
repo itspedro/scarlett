@@ -4,7 +4,7 @@ module.exports = {
     data: new  SlashCommandBuilder()
         .setName('reactor')
         .setDescription('Reações'),
-    async execute(interaction, client) {
+    async execute(interaction) {
         const message = await interaction.reply({
             content:`Funcionou :O 👍`,
             fetchReply: true

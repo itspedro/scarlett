@@ -6,7 +6,7 @@ module.exports = {
     data: new  SlashCommandBuilder()
         .setName('catfact')
         .setDescription('Responde um fato aleatório sobre gato!'),
-    async execute(interaction, client) {
+    async execute(interaction) {
         // const fact = await axios.get('https://meowfacts.herokuapp.com/?lang=por-br')
         //     .then((res) => {
         //         res.data.data[0]

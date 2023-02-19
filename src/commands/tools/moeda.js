@@ -1,4 +1,4 @@
-const { SlashCommandBuilder, EmbedBuilder, Embed, Attachment, AttachmentBuilder } = require("discord.js");
+const { SlashCommandBuilder, EmbedBuilder, Attachment, AttachmentBuilder } = require("discord.js");
 const fetch = require("node-fetch");
 const { createCanvas, loadImage } = require('canvas')
 

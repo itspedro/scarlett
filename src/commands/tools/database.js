@@ -7,7 +7,7 @@ module.exports = {
         .setName('registrar')
         .setDescription('Registra o server no Banco de Dados'),
 
-    async execute(interaction, client) {
+    async execute(interaction) {
         let guildProfile = await Guild.findOne({ guildId: interaction.guild.id })
         if(!guildProfile){ guildProfile = new Guild({ 
             _id: mongoose.Types.ObjectId(),
