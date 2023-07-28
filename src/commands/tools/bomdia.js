@@ -1,9 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder, PermissionFlagsBits } = require("discord.js");
-const cron = require("cron");
-const { API_KEY } = process.env;
-const fetch = require("node-fetch");
-const Guild = require ('../../schemas/guild');
-
+const Guild = require('../../schemas/guild');
+const bomDiaCron = require("../../utils/bomdia-cron");
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -11,70 +8,69 @@ module.exports = {
     .setDescription("Seleciona canal e hora para mandar bom dia")
     .setDefaultMemberPermissions(PermissionFlagsBits.Administrator)
     .addChannelOption((option) =>
-        option
-          .setName("chat")
-          .setDescription("Chat desejado")
-          .setRequired(true)
+      option
+        .setName("chat")
+        .setDescription("Chat desejado")
+        .setRequired(true)
     )
     .addIntegerOption((option) =>
-        option
-          .setName("horas")
-          .setDescription("Horas desejada")
-          .setRequired(true)
+      option
+        .setName("horas")
+        .setDescription("Horas desejada")
+        .setRequired(true)
     )
     .addIntegerOption((option) =>
-        option
-          .setName("minutos")
-          .setDescription("Minutos desejado")
-          .setRequired(true)
+      option
+        .setName("minutos")
+        .setDescription("Minutos desejado")
+        .setRequired(true)
     ),
-  
+
   async execute(interaction) {
 
-      let guildProfile = await Guild.findOne({ guildId: interaction.guild.id });
-      const channelLog = interaction.guild.channels.cache.get(guildProfile.guildLog);
+    let guildProfile = await Guild.findOne({ guildId: interaction.guild.id });
+    const channelLog = interaction.guild.channels.cache.get(guildProfile.guildLog);
 
-      const channel = interaction.options.getChannel("chat");
-      const horas = interaction.options.getInteger("horas");
-      const minutos = interaction.options.getInteger("minutos");
+    const channel = interaction.options.getChannel("chat");
+    let horas = interaction.options.getInteger("horas");
+    let minutos = interaction.options.getInteger("minutos");
 
-      const zeroPad = (num) => num.toString().padStart(2, '0')
+    const zeroPad = (num) => num.toString().padStart(2, '0');
 
-      const bomDia = new cron.CronJob({
-        cronTime: `00 ${zeroPad(!minutos ? 00 : minutos)} ${zeroPad(horas)} * * *`,
-        onTick: async() => {
-  
-        const url = `https://api.tenor.com/v2/search?q=bomdia&key=${API_KEY}`;
-        const resposta = await fetch(url);
-        const resultado = await resposta.json();
-        const index = Math.floor(Math.random() * resultado.results.length);
-        const gif = resultado.results[index].media_formats.gif.url
-  
-        const embed = new EmbedBuilder()
-          .setTitle(`Bom Dia!`)
-          .setColor(0x18e1ee)
-          .setDescription(':point_up: Clique aqui se o gif não aparecer.')
-          .setURL(gif)
-          .setImage(gif)
-          .setTimestamp();
-  
-        channel.send({embeds: [embed]});
-      },
-      timeZone: 'America/Sao_Paulo'
-    });
+    horas = zeroPad(horas);
+    minutos = !minutos ? minutos = '00' : zeroPad(minutos);
 
-    bomDia.start();
-    console.log("Bom dia");
+    if (guildProfile.bomDiaConfig) {
+      const { channel: channelID, horas: horasID, minutos: minutosID } = guildProfile.bomDiaConfig;
+      const channelExists = interaction.guild.channels.cache.get(channelID);
+      if (channelExists) {
+        const response = `>>> O bom dia já está setado para o chat: ${channelExists}\nTodos os dias às: **${zeroPad(horasID)} Hrs e ${zeroPad(!minutosID ? '00' : minutosID)} Min.**`
+        return interaction.reply({ content: response, ephemeral: true });
+      };
+    };
 
-    const response = `>>> O bom dia foi setado para o chat: ${channel}\nTodos os dias às: **${zeroPad(horas)} Hrs e ${zeroPad(!minutos ? 00 : minutos)} Min.**`
+    guildProfile = await Guild.findOneAndUpdate(
+      { guildId: interaction.guild.id },
+      {
+        bomDiaConfig: {
+          channel: channel.id,
+          horas,
+          minutos
+        }
+      }, { new: true }
+    );
+    
+    bomDiaCron(horas, minutos, channel);
+
+    const response = `>>> O bom dia foi setado para o chat: ${channel}\nTodos os dias às: **${zeroPad(horas)} Hrs e ${zeroPad(!minutos ? '00' : minutos)} Min.**`
 
     const embedLog = new EmbedBuilder()
-    .setTitle(`SET`)
-    .setColor(0x00FF00)
-    .setDescription(`O bom dia foi setado para o chat: ${channel}\nTodos os dias às: **${zeroPad(horas)} Hrs e ${zeroPad(!minutos ? 00 : minutos)} Min.**`)
-    .setTimestamp();
+      .setTitle(`SET`)
+      .setColor(0x00FF00)
+      .setDescription(`O bom dia foi setado para o chat: ${channel}\nTodos os dias às: **${zeroPad(horas)} Hrs e ${zeroPad(!minutos ? '00' : minutos)} Min.**`)
+      .setTimestamp();
 
-    channelLog.send({ embeds:[embedLog] });
+    channelLog.send({ embeds: [embedLog] });
 
     await interaction.reply({
       content: response,
