@@ -1,5 +1,6 @@
 const { ContextMenuCommandBuilder, ApplicationCommandType, AttachmentBuilder } = require('discord.js');
 const Canvas = require('@napi-rs/canvas');
+const { join } = require('path');
 
 module.exports = {
   data: new ContextMenuCommandBuilder()
@@ -79,8 +80,7 @@ module.exports = {
     };
 
     const lines = await wrapText(context, msgContent, 100);
-
-    context.font = `bold 40px Arial`;
+    context.font = `bold 40px Ubuntu`;
     context.fillStyle = '#ffffff';
     context.textAlign = 'center';
 

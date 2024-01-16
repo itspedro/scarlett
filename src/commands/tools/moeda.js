@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder, Attachment, AttachmentBuilder } = require("discord.js");
 const fetch = require("node-fetch");
-const { createCanvas, loadImage } = require('canvas')
+const Canvas = require('@napi-rs/canvas');
 
 
 module.exports = {
@@ -47,24 +47,23 @@ module.exports = {
       });
     }
     
-    const valor = parseFloat(resultado[`${moeda1}${moeda2}`].bid).toFixed(2);
-
+    const valor = parseFloat(resultado[`${moeda1}${moeda2}`].bid).toFixed(2);           
     const variacao = parseFloat(resultado[`${moeda1}${moeda2}`].varBid).toFixed(2);
     const variacaoPor = parseFloat(resultado[`${moeda1}${moeda2}`].pctChange).toFixed(2);
 
-    const canvas = createCanvas(800, 500);
+    const canvas = Canvas.createCanvas(800, 500);
     const context = canvas.getContext('2d');
     
     context.fillStyle = "#2b2d31";
     context.fillRect(0, 0, canvas.width, canvas.height);
 
     context.fillStyle = "white";
-    context.font = "bold 32px Arial";
+    context.font = "bold 32px Ubuntu";
     context.textBaseline = "hanging";
     context.fillText(`${resultado[`${moeda1}${moeda2}`].name}`, 15, 15);
 
     context.fillStyle = "white";
-    context.font = "normal 24px Arial";
+    context.font = "normal 24px Ubuntu";
     context.textBaseline = "hanging";
     context.fillText(`Últimos 30 dias`, 20, 55);
 
@@ -72,14 +71,14 @@ module.exports = {
     context.fillRect(10,100, canvas.width -20, 5)
 
     context.fillStyle = "white";
-    context.font = "bold 32px Arial";
+    context.font = "bold 32px Ubuntu";
     context.textBaseline = "hanging";
     context.fillText(`${valor} ${moeda2}`, 20, 110);
     const valorWidth = context.measureText(`${valor} ${moeda2}`).width;
 
     if (variacao > 0 || variacao < 0) {
       context.fillStyle = "white";
-      context.font = "bold 32px Arial";
+      context.font = "bold 32px Ubuntu";
       context.textBaseline = "hanging";
       context.fillText(`${variacao > 0 ? `+${variacao}` : `${variacao}` } | (${variacaoPor > 0 ? `+${variacaoPor}`: `${variacaoPor}`}%)`,
        50 + valorWidth, 110);
@@ -133,7 +132,7 @@ module.exports = {
       ]);
 
     await interaction.reply({
-      files: [new AttachmentBuilder(canvas.toBuffer(), {name: "chart.png"})],
+      files: [new AttachmentBuilder(await canvas.encode('png'), {name: "chart.png"})],
       embeds: [embed]
     });
       
