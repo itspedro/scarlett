@@ -1,6 +1,6 @@
 const { SlashCommandBuilder, EmbedBuilder } = require("discord.js");
 const fetch = require("node-fetch");
-const { Unsplash_Acess_Key } = process.env;
+const { UNSPLASH_ACCESS_KEY } = process.env;
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -13,7 +13,7 @@ module.exports = {
 
     const resposta = await fetch(url, {
         headers: {
-          Authorization: `Client-ID ${Unsplash_Acess_Key}`
+          Authorization: `Client-ID ${UNSPLASH_ACCESS_KEY}`
         }
       })
     const resultado = await resposta.json();
